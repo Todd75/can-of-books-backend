@@ -1,19 +1,34 @@
 'use strict';
-const mongoose = require('mongoose');
 
+// REQUIRE
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-
-//use mongoose
+const app = express();
 const mongoose = require('mongoose');
+const Book = require('./models/Book.js');
+
+//USE
+app.use(cors());
+
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error'));
+db.once('open', function () {
+  console.log('Mongoose is connected')
+});
+
+async function connectMongoose() {
+  mongoose.connect(process.env.DB_URL)
+}
+connectMongoose();
 
 // add validation to confirm we are wired up to our mongo DB
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function () {
-  console.log('Mongoose is connected');
-});
+// const db = mongoose.connection;
+// db.on('error', console.error.bind(console, 'connection error:'));
+// db.once('open', function () {
+//   console.log('Mongoose is connected');
+// });
 
 // ROUTES
 
@@ -21,8 +36,6 @@ app.get('/books', (req, res) => {
   res.send('connected to books server');
 });
 
-const app = express();
-app.use(cors());
 
 const PORT = process.env.PORT || 3002;
 
@@ -31,9 +44,7 @@ app.get('/test', (request, response) => {
   response.send('test request received')
 
 })
-async function mongoose() {
-  mongoose.connect(process.env.DB_URL)
-}
+
 
 app.listen(PORT, () => console.log(`listening on ${PORT}`));
 
