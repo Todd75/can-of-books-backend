@@ -16,3 +16,7 @@ const bookSchema = new Schema ({
   description: {type: String, required: true},
   status: {type: String, required: true}
 });
+
+const Book = mongoose.model('Book', bookSchema);
+
+module.exports = Book;
