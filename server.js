@@ -7,13 +7,6 @@ const cors = require('cors');
 
 //use mongoose
 const mongoose = require('mongoose');
-const { Book } = mongoose;
-
-const bookSchema = new Book ({
-  title: String,
-  description: String,
-  status: String
-});
 
 // add validation to confirm we are wired up to our mongo DB
 const db = mongoose.connection;
@@ -22,6 +15,11 @@ db.once('open', function () {
   console.log('Mongoose is connected');
 });
 
+// ROUTES
+
+app.get('/books', (req, res) => {
+  res.send('connected to books server');
+});
 
 const app = express();
 app.use(cors());
