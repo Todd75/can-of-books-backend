@@ -32,7 +32,7 @@ app.get('/test', (request, response) => {
 
 })
 async function mongoose() {
-  mongoose.conect(process.env.DB_URL)
+  mongoose.connect(process.env.DB_URL)
 }
 
 app.listen(PORT, () => console.log(`listening on ${PORT}`));
