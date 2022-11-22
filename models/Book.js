@@ -1,3 +1,4 @@
+'use strict';
 // book module
 // define schema
 
