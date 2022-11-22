@@ -29,6 +29,36 @@ Clone this repo to your own account with the green "Use this template" button. T
 
 ## Credit and Collaborations
 
+Name of feature: Deploy Front and Back End
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 1:30
+
+Finish time: 2:38
+
+Actual time needed to complete: 1 hour 8 minutes
+
+Name of feature: getData from Database
+
+Estimate of time needed to complete: 2 hours
+
+Start time: 3pm 
+
+Finish time: 5pm
+
+Actual time needed to complete: 2 hours
+
+Name of feature:deploy front and back end working together
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 6pm 
+
+Finish time: 7:30 
+
+Actual time needed to complete: 1.5 hours
+
 Name of feature:
 
 Estimate of time needed to complete:
