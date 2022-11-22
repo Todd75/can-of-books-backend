@@ -7,6 +7,8 @@ const cors = require('cors');
 const app = express();
 const mongoose = require('mongoose');
 const Book = require('./models/Book.js');
+// app.use(express.json());
+// app.delete('', )
 
 //USE
 app.use(cors());
@@ -33,16 +35,30 @@ connectMongoose();
 // ROUTES
 
 app.get('/books', getBooks);
+app.post('/books', handlePostBooks);
 
-async function getBooks(req, res, next) {
+async function getBooks(req, res) {
   try {
     let results = await Book.find();
+    if (booksFromDB.length > 0) {
     res.status(200).send(results);
-  } catch(err) {
-    next(err);
+  } else {
+    res.status(404).send(booksFromDB);
   }
-};
+  } catch(err) {
+    res.status(500).send('There is a Server Error, Please Try Again');
+  }
+}
 
+async function handlePostBooks(req, res) {
+  
+  try {
+    const addedBook = await Book.create(req.body)
+    res.status(201).send(addedBook);
+  }catch (e){
+    res.status(500).send('There is a Server Error, Please Try Again');
+  }
+}
 
 const PORT = process.env.PORT || 3002;
 
