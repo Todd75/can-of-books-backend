@@ -7,11 +7,13 @@ const cors = require('cors');
 const app = express();
 const mongoose = require('mongoose');
 const Book = require('./models/Book.js');
-// app.use(express.json());
+
+
 // app.delete('', )
 
 //USE
 app.use(cors());
+app.use(express.json());
 
 
 const db = mongoose.connection;
@@ -40,10 +42,11 @@ app.post('/books', handlePostBooks);
 async function getBooks(req, res) {
   try {
     let results = await Book.find();
-    if (booksFromDB.length > 0) {
+    console.log(results);
+    if (results.length > 0) {
     res.status(200).send(results);
   } else {
-    res.status(404).send(booksFromDB);
+    res.status(404).send(results);
   }
   } catch(err) {
     res.status(500).send('There is a Server Error, Please Try Again');
@@ -51,9 +54,9 @@ async function getBooks(req, res) {
 }
 
 async function handlePostBooks(req, res) {
-  
+  console.log('creating a book');
   try {
-    const addedBook = await Book.create(req.body)
+    const addedBook = await Book.create(req.body);
     res.status(201).send(addedBook);
   }catch (e){
     res.status(500).send('There is a Server Error, Please Try Again');
@@ -70,12 +73,3 @@ app.get('/test', (request, response) => {
 
 
 app.listen(PORT, () => console.log(`listening on ${PORT}`));
-
-// async function seed() {
-//   mongoose.connect(process.env.DB_URL)
-
-//   const db = mongoose.connection;
-//   db.on('error', console.error.bind(console, 'connection error'));
-//   db.once('open', function () {
-//     console.log('Mongoose is connected playa')
-//   });
