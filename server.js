@@ -32,9 +32,16 @@ connectMongoose();
 
 // ROUTES
 
-app.get('/books', (req, res) => {
-  res.send('connected to books server');
-});
+app.get('/books', getBooks);
+
+async function getBooks(req, res, next) {
+  try {
+    let results = await Book.find();
+    res.status(200).send(results);
+  } catch(err) {
+    next(err);
+  }
+};
 
 
 const PORT = process.env.PORT || 3002;
