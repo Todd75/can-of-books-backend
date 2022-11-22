@@ -43,7 +43,7 @@ Name of feature: getData from Database
 
 Estimate of time needed to complete: 2 hours
 
-Start time: 3pm 
+Start time: 3pm
 
 Finish time: 5pm
 
@@ -53,11 +53,21 @@ Name of feature:deploy front and back end working together
 
 Estimate of time needed to complete: 1 hour
 
-Start time: 6pm 
+Start time: 6pm
 
-Finish time: 7:30 
+Finish time: 7:30
 
 Actual time needed to complete: 1.5 hours
+
+Name of feature: handlePostBooks create post
+
+Estimate of time needed to complete: 1 hour
+
+Start time:2:30
+
+Finish time:
+
+Actual time needed to complete:
 
 Name of feature:
 
