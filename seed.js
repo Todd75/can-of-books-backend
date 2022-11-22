@@ -1,3 +1,4 @@
+'use strict';
 const mongoose = require('mongoose');
 const Book = require('./models/Book.js');
 require('dotenv').config();
