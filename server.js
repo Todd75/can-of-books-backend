@@ -38,6 +38,7 @@ connectMongoose();
 
 app.get('/books', getBooks);
 app.post('/books', handlePostBooks);
+app.delete('/books/:id', handleDeleteBooks);
 
 async function getBooks(req, res) {
   try {
@@ -60,6 +61,16 @@ async function handlePostBooks(req, res) {
     res.status(201).send(addedBook);
   }catch (e){
     res.status(500).send('There is a Server Error, Please Try Again');
+  }
+}
+
+async function handleDeleteBooks(req, res) {
+  console.log('Deleting a Book');
+  try {
+    await Book.findByIdAndDelete(req.params.id);
+    res.status(204).send('Book has been Deleted');
+  } catch (err) {
+    res.status(500).send('Unable to Delete: Server Error');
   }
 }
 
