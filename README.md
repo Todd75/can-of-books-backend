@@ -65,9 +65,19 @@ Estimate of time needed to complete: 1 hour
 
 Start time:2:30
 
-Finish time:
+Finish time: 2:45 
 
-Actual time needed to complete:
+Actual time needed to complete: 15 minutes
+
+Name of feature: remove book delete button
+
+Estimate of time needed to complete: 2
+
+Start time: 4
+
+Finish time: 7:30
+
+Actual time needed to complete:3 hours
 
 Name of feature:
 
