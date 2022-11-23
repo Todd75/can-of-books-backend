@@ -80,7 +80,7 @@ async function putBooks(req, res, next) {
     let id = req.params.id;
     let updatedBooksData = req.body;
 
-    let updatedBooks = await Books.findByIdAndUpdate(id, updatedBooksData, {new: true, overwrites: true});
+    let updatedBooks = await Book.findByIdAndUpdate(id, updatedBooksData, {new: true, overwrites: true});
     res.status(200).send(updatedBooks);
 
   } catch(error) {
