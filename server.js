@@ -7,7 +7,7 @@ const cors = require('cors');
 const app = express();
 const mongoose = require('mongoose');
 const Book = require('./models/Book.js');
-
+const verifyUser = require('./auth.js');
 
 // app.delete('', )
 
@@ -40,6 +40,26 @@ app.get('/books', getBooks);
 app.post('/books', handlePostBooks);
 app.delete('/books/:id', handleDeleteBooks);
 app.put('/books/:id', putBooks);
+
+verifyUser(req, async (err, user) => {
+  if (err) {
+    console.log(err);
+    res.send('Invalid Token');
+  } else {
+    try {
+      let results = await Book.find();
+      console.log(results);
+      if (results.length > 0) {
+      res.status(200).send(results);
+    } else {
+      res.status(404).send(results);
+    }
+    } catch(err) {
+      res.status(500).send('There is a Server Error, Please Try Again');
+    }
+  }
+});
+}
 
 async function getBooks(req, res) {
   try {
