@@ -27,4 +27,4 @@ function verifyUser(req, errorFirstOrUserCallbackFunction) {
     }
 }
 
-module.export = verifyUser;
+module.exports = verifyUser;

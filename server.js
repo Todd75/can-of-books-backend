@@ -7,11 +7,9 @@ const cors = require('cors');
 const app = express();
 const mongoose = require('mongoose');
 const Book = require('./models/Book.js');
-const verifyUser = require('./auth.js');
+const verifyUser = require('./auth');
 
-// app.delete('', )
 
-//USE
 app.use(cors());
 app.use(express.json());
 
@@ -41,38 +39,45 @@ app.post('/books', handlePostBooks);
 app.delete('/books/:id', handleDeleteBooks);
 app.put('/books/:id', putBooks);
 
-verifyUser(req, async (err, user) => {
-  if (err) {
-    console.log(err);
-    res.send('Invalid Token');
-  } else {
-    try {
-      let results = await Book.find();
-      console.log(results);
-      if (results.length > 0) {
-      res.status(200).send(results);
-    } else {
-      res.status(404).send(results);
-    }
-    } catch(err) {
-      res.status(500).send('There is a Server Error, Please Try Again');
-    }
-  }
-});
-}
+// verifyUser(request, async (err, user) => {
+//   if (err) {
+//     console.log(err);
+//     res.send('Invalid Token');
+//   } else {
+//     try {
+//       let results = await Book.find();
+//       console.log(results);
+//       if (results.length > 0) {
+//       res.status(200).send(results);
+//     } else {
+//       res.status(404).send(results);
+//     }
+//     } catch(err) {
+//       res.status(500).send('There is a Server Error, Please Try Again');
+//     }
+//   }
+// });
+
 
 async function getBooks(req, res) {
-  try {
-    let results = await Book.find();
-    console.log(results);
-    if (results.length > 0) {
-    res.status(200).send(results);
-  } else {
-    res.status(404).send(results);
-  }
-  } catch(err) {
-    res.status(500).send('There is a Server Error, Please Try Again');
-  }
+  verifyUser(req, async (err, user) => {
+    if (err) {
+      res.send('Invalid Token');
+    } else {
+      try { 
+        console.log(req);
+        let results = await Book.find();
+        console.log(results);
+        if (results.length > 0) {
+          res.status(200).send(results);
+        } else {
+          res.status(404).send('error');
+        }
+      } catch (err) {
+        res.status(500).send('There is a Server Error, Please Try Again');
+      }
+    }
+  });
 }
 
 async function handlePostBooks(req, res) {
@@ -80,7 +85,7 @@ async function handlePostBooks(req, res) {
   try {
     const addedBook = await Book.create(req.body);
     res.status(201).send(addedBook);
-  }catch (e){
+  } catch (e) {
     res.status(500).send('There is a Server Error, Please Try Again');
   }
 }
@@ -100,10 +105,10 @@ async function putBooks(req, res, next) {
     let id = req.params.id;
     let updatedBooksData = req.body;
 
-    let updatedBooks = await Book.findByIdAndUpdate(id, updatedBooksData, {new: true, overwrites: true});
+    let updatedBooks = await Book.findByIdAndUpdate(id, updatedBooksData, { new: true, overwrites: true });
     res.status(200).send(updatedBooks);
 
-  } catch(error) {
+  } catch (error) {
     next(error);
   }
 }
